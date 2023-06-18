@@ -59,3 +59,13 @@ MyString User::getLastName() const
 	return lastName;
 }
 
+void User::addMoney(size_t money)
+{
+	currentMoney += money;
+}
+
+size_t User::getMoney() const
+{
+	return currentMoney;
+}
+

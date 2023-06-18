@@ -1,5 +1,6 @@
 #include "UserManagement.h"
 
+
 UserManagement::UserManagement()
 {
 	//clients = 
@@ -47,6 +48,10 @@ void UserManagement::logClient()
 			loggedUser = &clients[i];
 		}
 	}
+	if (loggedUser == nullptr) {
+		throw std::logic_error("There is no such user in the system!");
+		
+	}
 }
 
 void UserManagement::logDriver()
@@ -63,6 +68,10 @@ void UserManagement::logDriver()
 			loggedUser = &drivers[i];
 		}
 	}
+	if (loggedUser == nullptr) {
+		throw std::logic_error("There is no such user in the system!");
+		
+	}
 }
 
 void UserManagement::logoutClient()
@@ -74,3 +83,99 @@ void UserManagement::logoutDriver()
 {
 	loggedUser = nullptr;
 }
+
+void UserManagement::makeOrder()
+{
+	MyString addressName1, addressName2, additionalInfo;
+	size_t numberOfPeople;
+	int x1, x2, y1, y2;
+
+	std::cout << "Please enter the name of your location: " << std::endl;
+	std::cin >> addressName1;
+	std::cout << "Please enter the coordinates of you location: " << std::endl;
+	std::cin >> x1 >> y1;
+	std::cout << "Please enter the name of the destination you would like to go to: " << std::endl;
+	std::cin >> addressName2;
+	std::cout << "Please enter the coordinates of the location you would like to go to: " << std::endl;
+	std::cin >> x2 >> y2;
+	
+	std::cout << "Would you like to add any other information?" << std::endl << "If yes, please enter 1, if not - enter 2." << std::endl;
+	int input;
+	std::cin >> input;
+	if (input == 1) {
+		std::cin >> additionalInfo;
+		std::cout << "The additional information has been added successfully!" << std::endl;
+	}
+	else if (input == 2) {
+		std::cout << "No additional information will be added!" << std::endl;
+	}
+	else {
+		throw std::logic_error("Invalid input!");
+	}
+	
+	//logoutClient();
+	//return closestDriver(x1, y1);
+	
+	Order order(closestDriver(x1, y1, ), loggedUser, addressName1, addressName2, additionalInfo, x1, y1, x2, y2);
+	orders.push_back(order);
+}
+
+Driver* UserManagement::closestDriver(int x, int y, int declinedOrders)
+{
+	/*int minDistance = drivers[0].getDistance(x, y);
+	Driver* wantedDriver = &drivers[0];
+
+	for (size_t i = 0; i < drivers.Size(); i++)
+	{
+		size_t distance = drivers[i].getDistance(x, y);
+		if (i != 0 && distance < minDistance) {
+			minDistance = distance;
+			wantedDriver = &drivers[i];
+		}
+	}
+	return wantedDriver;*/
+	Order order;
+	Driver* closestDriver = &drivers[order.numberOfDeclinedOrders];
+	int closestDistance = closestDriver->getDistance(x, y);
+
+	for (size_t i = 1; i < drivers.Size(); i++)
+	{
+		int distance = drivers[i].getDistance(x, y);
+		if (distance < closestDistance)
+		{
+			closestDriver = &drivers[i];
+			closestDistance = distance;
+
+			for (size_t j = i; j > 0; j--)
+			{
+				drivers[j] = drivers[j - 1];
+			}
+			drivers[order.numberOfDeclinedOrders] = *closestDriver;
+		}
+	}
+
+	return closestDriver;
+	
+}
+
+void UserManagement::acceptOrder() const
+{
+	int minutes, id;
+	std::cout << "How many minutes is the order going to take?" << std::endl;
+	std::cin >> minutes;
+	std::cout << "Choose an id: " << std::endl;
+	std::cin >> id;
+	Driver driver;
+	driver.acceptOrder(id, minutes);
+	
+}
+
+void UserManagement::declineOrder() const
+{
+	/*Driver driver;
+	driver.declineOrder(id);*/
+}
+
+
+
+

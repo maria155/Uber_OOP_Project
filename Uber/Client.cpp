@@ -27,14 +27,14 @@ void Client::registerUser()
 	std::cin >> lastName;
 }
 
-void Client::login() 
-{
-	/*std::cout << "Please enter your username: " << std::endl;
-	std::cin >> username;
-	std::cout << "Please enter your password: " << std::endl;
-	std::cin >> password;*/
-}
-
-void Client::logout() const
-{
-}
+//void Client::login() 
+//{
+//	/*std::cout << "Please enter your username: " << std::endl;
+//	std::cin >> username;
+//	std::cout << "Please enter your password: " << std::endl;
+//	std::cin >> password;*/
+//}
+//
+//void Client::logout() const
+//{
+//}

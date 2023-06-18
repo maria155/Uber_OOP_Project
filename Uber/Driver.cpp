@@ -29,6 +29,12 @@ MyString Driver::getPhoneNumber() const
 	return phoneNumber;
 }
 
+void Driver::changeAddress(const MyString& nameOfAddress, int x, int y)
+{
+	this->nameOfAddress = nameOfAddress;
+	point = {x, y}; 
+}
+
 void Driver::registerUser() 
 {
 	std::cout << "Please enter your username: " << std::endl;
@@ -46,10 +52,53 @@ void Driver::registerUser()
 
 }
 
-void Driver::login() 
+//void Driver::login() 
+//{
+//}
+//
+//void Driver::logout() const
+//{
+//}
+
+size_t Driver::getDistance(int c1, int c2) const
 {
+	int dx = c1 - point.x;
+	int dy = c2 - point.y;
+
+	return sqrt(dx * dx + dy * dy);
 }
 
-void Driver::logout() const
+void Driver::receiveOrder(Order* order)
 {
+	orders.push_back(order);
+}
+
+void Driver::acceptOrder(int id, int minutes)
+{
+	currentOrder = orders[findOrderPerId(id)];
+	currentOrder->changeStatus(orderStatus::ACCEPTED);
+}
+
+void Driver::declineOrder(int id)
+{
+	int position = findOrderPerId(id);
+	
+	if (position >= 0) {
+		orders[position]->changeStatus(orderStatus::CANCELLED);
+		orders.deleteAt(position);
+	}
+	else {
+		//error message
+	}
+}
+
+int Driver::findOrderPerId(int id) const
+{
+	for (int i = 0; i < orders.Size(); i++)
+	{
+		if (orders[i]->getId() == id) {
+			return i;
+		}
+	}
+	return -1;
 }

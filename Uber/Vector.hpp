@@ -23,7 +23,7 @@ public:
 	T& operator[](size_t i);
 	T& operator[](size_t i) const;
 	bool isEmpty() const;
-
+	
 };
 
 template<class T>
@@ -146,6 +146,7 @@ bool Vector<T>::isEmpty() const
 {
 	return size == 0;
 }
+
 
 
 //#pragma once

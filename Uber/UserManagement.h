@@ -1,4 +1,3 @@
-
 #pragma once
 #include "Vector.hpp"
 #include "Client.h"
@@ -9,6 +8,7 @@ class UserManagement
 private:
 	Vector<Client> clients;
 	Vector<Driver> drivers;
+	Vector<Order> orders;
 	User* loggedUser = nullptr;
 public:
 	UserManagement();
@@ -19,6 +19,12 @@ public:
 	void logDriver();
 	void logoutClient();
 	void logoutDriver();
+	void makeOrder();
+	Driver* closestDriver(int x, int y, int declinedOrders);
+	void giveRating();
+	void acceptOrder() const;
+	void declineOrder() const;
+	//void bubbleSort(Vector<Driver> drivers, int size);
 };
 
 

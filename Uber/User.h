@@ -14,6 +14,7 @@ protected:
 	MyString password;
 	MyString firstName;
 	MyString lastName;
+	size_t currentMoney = 0;
 public:
 	//User() = default;
 	//User(UserType userType, const MyString& username, const MyString& password, const MyString& firstName, const MyString& lastName);
@@ -33,10 +34,13 @@ public:
 	void setLastName(const MyString& lastName);
 	MyString getLastName() const;
 
+	void addMoney(size_t money);
+	size_t getMoney() const;
+
 	//virtual void login(const MyString& username, const MyString& password) = 0; 
 	virtual void registerUser() = 0;
-	virtual void login() = 0;
-	virtual void logout() const = 0; 
+	/*virtual void login() = 0;
+	virtual void logout() const = 0; */
 	virtual ~User() = default;
 };
 

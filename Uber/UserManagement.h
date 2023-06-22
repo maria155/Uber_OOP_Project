@@ -20,7 +20,7 @@ public:
 	void logoutClient();
 	void logoutDriver();
 	void makeOrder();
-	Driver* closestDriver(int x, int y, int declinedOrders);
+	Driver* closestDriver(int x, int y, int declinedOrders) const;
 	void giveRating();
 	void acceptOrder() const;
 	void declineOrder() const;

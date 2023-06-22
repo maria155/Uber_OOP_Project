@@ -40,7 +40,7 @@ public:
 	void receiveOrder(Order* order);
 	void viewOrder() const;
 	void acceptOrder(int id, int minutes);
-	void declineOrder(int id);
+	Order* declineOrder(int id);
 	int findOrderPerId(int id) const;
 };
 

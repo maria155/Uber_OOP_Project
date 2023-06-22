@@ -22,9 +22,8 @@ private:
 	int x1, y1, x2, y2;
 	int time;
 	int id;
-	
-public:
 	int numberOfDeclinedOrders = 0;
+public:
 	Order() = default;
 	Order(User* currentDriver, User* client, const MyString& firstAddress, const MyString& secondAddress, const MyString& additionalInfo,
 		int x1, int y1, int x2, int y2);
@@ -32,5 +31,9 @@ public:
 	void changeStatus(orderStatus statusOfOrder);
 	void viewOrder() const;
 	int getId() const;
+	bool changeDriver(Driver* driver);
+	int getX1() const;
+	int getY1() const;
+	int getNumberOfDeclinedOrders() const;
 };
 

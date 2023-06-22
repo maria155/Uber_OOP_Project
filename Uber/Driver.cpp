@@ -79,13 +79,15 @@ void Driver::acceptOrder(int id, int minutes)
 	currentOrder->changeStatus(orderStatus::ACCEPTED);
 }
 
-void Driver::declineOrder(int id)
+Order* Driver::declineOrder(int id)
 {
 	int position = findOrderPerId(id);
 	
 	if (position >= 0) {
-		orders[position]->changeStatus(orderStatus::CANCELLED);
+		orders[position]->changeStatus(orderStatus::DECLINED);
+		Order* order = orders[position];
 		orders.deleteAt(position);
+		return order;
 	}
 	else {
 		//error message

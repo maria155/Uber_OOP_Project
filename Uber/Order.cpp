@@ -32,7 +32,10 @@ void Order::changeStatus(orderStatus statusOfOrder)
 	}
 	else if (this->statusOfOrder == orderStatus::DECLINED) {
 		numberOfDeclinedOrders++;
-		
+		this->statusOfOrder = statusOfOrder;
+	}
+	else if (this->statusOfOrder == orderStatus::NOTACCEPTED) {
+		this->statusOfOrder = statusOfOrder;
 	}
 	//not finished
 }
@@ -46,4 +49,33 @@ void Order::viewOrder() const
 int Order::getId() const
 {
 	return id;
+}
+
+bool Order::changeDriver(Driver* driver)
+{
+	if (statusOfOrder == orderStatus::DECLINED) {
+		delete currentDriver;
+		currentDriver = driver;
+		changeStatus(orderStatus::NOTACCEPTED);
+		return true;
+	}
+	else {
+		//message
+		return false;
+	}
+}
+
+int Order::getX1() const
+{
+	return x1;
+}
+
+int Order::getY1() const
+{
+	return y1;
+}
+
+int Order::getNumberOfDeclinedOrders() const
+{
+	return numberOfDeclinedOrders;
 }

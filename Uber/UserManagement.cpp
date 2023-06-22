@@ -115,12 +115,13 @@ void UserManagement::makeOrder()
 	
 	//logoutClient();
 	//return closestDriver(x1, y1);
-	
-	Order order(closestDriver(x1, y1, ), loggedUser, addressName1, addressName2, additionalInfo, x1, y1, x2, y2);
+	Driver* currentDriver = closestDriver(x1, y1, 0);
+	Order order(currentDriver, loggedUser, addressName1, addressName2, additionalInfo, x1, y1, x2, y2);
 	orders.push_back(order);
+	currentDriver->receiveOrder(&order);
 }
 
-Driver* UserManagement::closestDriver(int x, int y, int declinedOrders)
+Driver* UserManagement::closestDriver(int x, int y, int declinedOrders) const
 {
 	/*int minDistance = drivers[0].getDistance(x, y);
 	Driver* wantedDriver = &drivers[0];
@@ -134,8 +135,8 @@ Driver* UserManagement::closestDriver(int x, int y, int declinedOrders)
 		}
 	}
 	return wantedDriver;*/
-	Order order;
-	Driver* closestDriver = &drivers[order.numberOfDeclinedOrders];
+	//Order order;
+	Driver* closestDriver = &drivers[0];
 	int closestDistance = closestDriver->getDistance(x, y);
 
 	for (size_t i = 1; i < drivers.Size(); i++)
@@ -150,11 +151,11 @@ Driver* UserManagement::closestDriver(int x, int y, int declinedOrders)
 			{
 				drivers[j] = drivers[j - 1];
 			}
-			drivers[order.numberOfDeclinedOrders] = *closestDriver;
+			drivers[0] = *closestDriver;
 		}
 	}
 
-	return closestDriver;
+	return &drivers[declinedOrders];
 	
 }
 
@@ -165,15 +166,36 @@ void UserManagement::acceptOrder() const
 	std::cin >> minutes;
 	std::cout << "Choose an id: " << std::endl;
 	std::cin >> id;
-	Driver driver;
-	driver.acceptOrder(id, minutes);
+	
+	Driver* driver = dynamic_cast<Driver*>(loggedUser);
+	if (driver != nullptr) {
+		driver->acceptOrder(id, minutes);
+	}
+	else {
+		std::cout << "Only drivers can accept an order.";
+	}
+		
 	
 }
 
 void UserManagement::declineOrder() const
 {
-	/*Driver driver;
-	driver.declineOrder(id);*/
+	int id;
+	std::cout << "Choose an id: " << std::endl;
+	std::cin >> id;
+
+	Driver* driver = dynamic_cast<Driver*>(loggedUser);
+	if (driver != nullptr) {
+		Order* currentOrder = driver->declineOrder(id);
+		Driver* currentDriver = closestDriver(currentOrder->getX1(), currentOrder->getY1(), currentOrder->getNumberOfDeclinedOrders());
+		if (currentOrder->changeDriver(currentDriver)) {
+			currentDriver->receiveOrder(currentOrder);
+		}
+		
+	}
+	else {
+		std::cout << "Only drivers can decline an order.";
+	}
 }
 
 

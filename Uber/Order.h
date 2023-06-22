@@ -15,12 +15,12 @@ enum orderStatus {
 class Order
 {
 private:
-	orderStatus statusOfOrder = NOTACCEPTED;
+	orderStatus statusOfOrder;
 	Driver* currentDriver;
 	Client* client;
 	MyString firstAddress, secondAddress, additionalInfo;
 	int x1, y1, x2, y2;
-	int time;
+	int timeNeeded;
 	int id;
 	int numberOfDeclinedOrders = 0;
 public:
@@ -34,6 +34,10 @@ public:
 	bool changeDriver(Driver* driver);
 	int getX1() const;
 	int getY1() const;
+	int getX2() const;
+	int getY2() const;
+	orderStatus getStatus() const;
+	const MyString& getNameOfSecondAddress() const;
 	int getNumberOfDeclinedOrders() const;
 };
 

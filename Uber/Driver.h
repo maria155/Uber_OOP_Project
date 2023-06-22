@@ -38,9 +38,11 @@ public:
 
 	size_t getDistance(int c1, int c2) const;
 	void receiveOrder(Order* order);
-	void viewOrder() const;
+	//void viewOrder() const;
 	void acceptOrder(int id, int minutes);
 	Order* declineOrder(int id);
 	int findOrderPerId(int id) const;
+	Order* finishOrder(int id);
+	void checkMessages() const;
 };
 

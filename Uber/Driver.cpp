@@ -75,8 +75,19 @@ void Driver::receiveOrder(Order* order)
 
 void Driver::acceptOrder(int id, int minutes)
 {
-	currentOrder = orders[findOrderPerId(id)];
-	currentOrder->changeStatus(orderStatus::ACCEPTED);
+	int position = findOrderPerId(id);
+	if (position < 0) {
+		std::cout << "Error! There isn`t an order with such ID!";
+		return;
+	}
+	currentOrder = orders[position];
+
+	if (currentOrder->getStatus() == orderStatus::NOTACCEPTED) {
+		currentOrder->changeStatus(orderStatus::ACCEPTED);
+	}
+	else {
+		std::cout << "Cannot accept order with this status!";
+	}
 }
 
 Order* Driver::declineOrder(int id)
@@ -103,4 +114,34 @@ int Driver::findOrderPerId(int id) const
 		}
 	}
 	return -1;
+}
+
+Order* Driver::finishOrder(int id)
+{
+	int position = findOrderPerId(id);
+	if (position >= 0) {
+		orders[position]->changeStatus(orderStatus::FINISHED);
+		currentOrder = nullptr;
+		return orders[position];
+	}
+	else {
+		std::cout << "Error!";
+		return nullptr;
+	}
+}
+
+void Driver::checkMessages() const
+{
+	size_t size = orders.Size();
+	int counter = 0;
+	for (size_t i = 0; i < size; i++)
+	{
+		if (orders[i]->getStatus() == orderStatus::NOTACCEPTED) {
+			orders[i]->viewOrder();
+			counter++;
+		}
+	}
+	if (counter == 0) {
+		std::cout << "There are no new messages!" << std::endl;
+	}
 }

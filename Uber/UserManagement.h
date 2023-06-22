@@ -24,6 +24,8 @@ public:
 	void giveRating();
 	void acceptOrder() const;
 	void declineOrder() const;
+	void finishOrder() const;
+	void checkMessages() const;
 	//void bubbleSort(Vector<Driver> drivers, int size);
 };
 

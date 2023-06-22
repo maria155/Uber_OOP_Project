@@ -198,6 +198,33 @@ void UserManagement::declineOrder() const
 	}
 }
 
+void UserManagement::finishOrder() const
+{
+	int id;
+	std::cout << "Choose an id: " << std::endl;
+	std::cin >> id;
+	Driver* driver = dynamic_cast<Driver*>(loggedUser);
+	if (driver == nullptr) {
+		std::cout << "Error! Only drivers can finish order!" << std::endl;
+		return;
+	}
+	Order* currentOrder = driver->finishOrder(id);
+	int x = currentOrder->getX2();
+	int y = currentOrder->getY2();
+	MyString address = currentOrder->getNameOfSecondAddress();
+	driver->changeAddress(address, x, y);
+}
+
+void UserManagement::checkMessages() const
+{
+	Driver* driver = dynamic_cast<Driver*>(loggedUser);
+	if (driver == nullptr) {
+		std::cout << "Error! Only drivers can view order!" << std::endl;
+		return;
+	}
+	driver->checkMessages();
+}
+
 
 
 

@@ -59,13 +59,24 @@ MyString User::getLastName() const
 	return lastName;
 }
 
-void User::addMoney(size_t money)
+void User::addMoney(double money)
 {
 	currentMoney += money;
 }
 
-size_t User::getMoney() const
+double User::getMoney() const
 {
 	return currentMoney;
+}
+
+int User::findOrderPerId(int id) const
+{
+	for (int i = 0; i < orders.Size(); i++)
+	{
+		if (orders[i]->getId() == id) {
+			return i;
+		}
+	}
+	return -1;
 }
 

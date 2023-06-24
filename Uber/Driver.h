@@ -8,8 +8,9 @@ private:
 	MyString carNumber;
 	MyString phoneNumber;
 	MyString nameOfAddress;
-	int rating;
-	Vector<Order*> orders;
+	double rating = 0;
+	int countOfRating = 0;
+	//Vector<Order*> orders;
 	Order* currentOrder = nullptr;
 
 	struct Point {
@@ -17,6 +18,8 @@ private:
 		int y;
 
 	} point;
+
+	//double driversMoney;
 
 public:
 	Driver() = default;
@@ -41,8 +44,11 @@ public:
 	//void viewOrder() const;
 	void acceptOrder(int id, int minutes);
 	Order* declineOrder(int id);
-	int findOrderPerId(int id) const;
+	//int findOrderPerId(int id) const;
 	Order* finishOrder(int id);
 	void checkMessages() const;
+	double getRating() const;
+	void setRating(double rating);
+	void acceptPayment(int id);
 };
 

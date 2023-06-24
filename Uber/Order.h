@@ -17,17 +17,18 @@ class Order
 private:
 	orderStatus statusOfOrder;
 	Driver* currentDriver;
-	Client* client;
+	Client* currentClient;
 	MyString firstAddress, secondAddress, additionalInfo;
 	int x1, y1, x2, y2;
 	int timeNeeded;
 	int id;
 	int numberOfDeclinedOrders = 0;
+	bool isPaid = false;
+	//size_t moneyPaid = 0;
 public:
 	Order() = default;
-	Order(User* currentDriver, User* client, const MyString& firstAddress, const MyString& secondAddress, const MyString& additionalInfo,
+	Order(Driver* currentDriver, Client* currentClient, const MyString& firstAddress, const MyString& secondAddress, const MyString& additionalInfo,
 		int x1, int y1, int x2, int y2);
-	//int calculateTime(int x1, int y1, int x2, int y2);
 	void changeStatus(orderStatus statusOfOrder);
 	void viewOrder() const;
 	int getId() const;
@@ -36,8 +37,13 @@ public:
 	int getY1() const;
 	int getX2() const;
 	int getY2() const;
+	bool isItPaid() const;
 	orderStatus getStatus() const;
 	const MyString& getNameOfSecondAddress() const;
 	int getNumberOfDeclinedOrders() const;
+	size_t getMoneyPaid() const;
+	double calculatePayment() const;
+	void pay();
+	void rate(double rating) const;
 };
 

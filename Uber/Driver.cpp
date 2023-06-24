@@ -105,16 +105,16 @@ Order* Driver::declineOrder(int id)
 	}
 }
 
-int Driver::findOrderPerId(int id) const
-{
-	for (int i = 0; i < orders.Size(); i++)
-	{
-		if (orders[i]->getId() == id) {
-			return i;
-		}
-	}
-	return -1;
-}
+//int Driver::findOrderPerId(int id) const
+//{
+//	for (int i = 0; i < orders.Size(); i++)
+//	{
+//		if (orders[i]->getId() == id) {
+//			return i;
+//		}
+//	}
+//	return -1;
+//}
 
 Order* Driver::finishOrder(int id)
 {
@@ -140,8 +140,34 @@ void Driver::checkMessages() const
 			orders[i]->viewOrder();
 			counter++;
 		}
+		else if (orders[i]->getStatus() == orderStatus::CANCELLED) {
+			std::cout << "The order with the ID " << orders[i]->getId() << " has been cancelled!" << std::endl;
+		}
 	}
 	if (counter == 0) {
 		std::cout << "There are no new messages!" << std::endl;
+	}
+}
+
+double Driver::getRating() const
+{
+	return rating / countOfRating;
+}
+
+void Driver::setRating(double rating)
+{
+	this->rating += rating;
+}
+
+void Driver::acceptPayment(int id)
+{
+	int position = findOrderPerId(id);
+	if (orders[position]->isItPaid()) {
+		double money = orders[position]->calculatePayment();
+		currentMoney += money;
+		std::cout << "I have accepted " << money << " leva from the client." << std::endl;
+	}
+	else {
+		std::cout << "The client hasn`t paid for this order!" << std::endl;
 	}
 }

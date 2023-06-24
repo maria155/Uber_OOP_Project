@@ -27,6 +27,40 @@ void Client::registerUser()
 	std::cin >> lastName;
 }
 
+Order* Client::getCurrentOrder() const
+{
+	return currentOrder;
+}
+
+void Client::pay()
+{
+	if (currentOrder->getStatus() == orderStatus::FINISHED) {
+		double amount = currentOrder->calculatePayment();
+		if (currentMoney >= amount) {
+			currentMoney -= amount;
+			currentOrder->pay();
+		}
+		else {
+			std::cout << "WE ARE CALLING THE POLICE!" << std::endl;
+		}
+	}
+	else {
+		std::cout << "You cannot pay for an order that is not finished!" << std::endl;
+	}
+}
+
+Order* Client::rate(const MyString& firstName, const MyString& lastName, double rating) const
+{
+	return nullptr;
+}
+
+void Client::checkOrder() const
+{
+	currentOrder->viewOrder();
+}
+
+
+
 //void Client::login() 
 //{
 //	/*std::cout << "Please enter your username: " << std::endl;

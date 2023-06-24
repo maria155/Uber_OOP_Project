@@ -21,11 +21,19 @@ public:
 	void logoutDriver();
 	void makeOrder();
 	Driver* closestDriver(int x, int y, int declinedOrders) const;
-	void giveRating();
 	void acceptOrder() const;
 	void declineOrder() const;
 	void finishOrder() const;
 	void checkMessages() const;
+	//void clientPays() const;
+	void rate() const;
+	void cancelOrder() const;
+	void pay() const;
+	void acceptPayment() const;
+	void changeAddress();
+	void checkOrder() const;
+	void addMoney();
+
 	//void bubbleSort(Vector<Driver> drivers, int size);
 };
 

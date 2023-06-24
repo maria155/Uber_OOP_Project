@@ -3,11 +3,11 @@
 #include <iostream>
 #include <time.h>
 
-Order::Order(User* currentDriver, User* client, const MyString& firstAddress, const MyString& secondAddress, const MyString& additionalInfo, int x1, int y1, int x2, int y2)
+Order::Order(Driver* currentDriver, Client* currentClient, const MyString& firstAddress, const MyString& secondAddress, const MyString& additionalInfo, int x1, int y1, int x2, int y2)
 {
 	this->statusOfOrder = orderStatus::NOTACCEPTED;
-	this->currentDriver = (Driver*)currentDriver;
-	this->client = (Client*)client;
+	this->currentDriver = currentDriver;
+	this->currentClient = currentClient;
 	this->firstAddress = firstAddress;
 	this->secondAddress = secondAddress;
 	this->additionalInfo = additionalInfo;
@@ -42,13 +42,15 @@ void Order::changeStatus(orderStatus statusOfOrder)
 	else if (this->statusOfOrder == orderStatus::NOTACCEPTED) {
 		this->statusOfOrder = statusOfOrder;
 	}
-	//not finished
+	else if (this->statusOfOrder == orderStatus::CANCELLED) {
+		this->statusOfOrder = statusOfOrder;
+	}
 }
 
 void Order::viewOrder() const
 {
 	std::cout << "Name of driver: " << currentDriver->getFirstName() << " "  << currentDriver->getLastName() << std::endl;
-	std::cout << "Name of client: " << client->getFirstName() << " " << client->getLastName() << std::endl;
+	std::cout << "Name of client: " << currentClient->getFirstName() << " " << currentClient->getLastName() << std::endl;
 	std::cout << "First address: " << firstAddress<< std::endl;
 	std::cout << "Second address: " << secondAddress << std::endl;
 	std::cout << "Additional information: " << additionalInfo << std::endl;
@@ -109,4 +111,28 @@ orderStatus Order::getStatus() const
 int Order::getNumberOfDeclinedOrders() const
 {
 	return numberOfDeclinedOrders;
+}
+
+bool Order::isItPaid() const
+{
+	return isPaid;
+}
+
+
+double Order::calculatePayment() const
+{
+	int dx = x1 - x2;
+	int dy = y1 - y2;
+	
+	return sqrt(dx * dx + dy * dy) * 1.5; //we multiply the distance between the two locations by 1.5 to get the money the client has to pay the driver
+}
+
+void Order::rate(double rating) const
+{
+	currentDriver->setRating(rating);
+}
+
+void Order::pay()
+{
+	isPaid = true;
 }

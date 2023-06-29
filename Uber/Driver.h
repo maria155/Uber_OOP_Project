@@ -10,7 +10,6 @@ private:
 	MyString nameOfAddress;
 	double rating = 0;
 	int countOfRating = 0;
-	//Vector<Order*> orders;
 	Order* currentOrder = nullptr;
 
 	struct Point {
@@ -19,7 +18,6 @@ private:
 
 	} point;
 
-	//double driversMoney;
 
 public:
 	Driver() = default;
@@ -36,15 +34,10 @@ public:
 	
 
 	virtual void registerUser() override;
-	/*virtual void login() override;
-	virtual void logout() const override;*/
-
 	size_t getDistance(int c1, int c2) const;
 	void receiveOrder(Order* order);
-	//void viewOrder() const;
 	void acceptOrder(int id, int minutes);
 	Order* declineOrder(int id);
-	//int findOrderPerId(int id) const;
 	Order* finishOrder(int id);
 	void checkMessages() const;
 	double getRating() const;

@@ -24,7 +24,6 @@ private:
 	int id;
 	int numberOfDeclinedOrders = 0;
 	bool isPaid = false;
-	//size_t moneyPaid = 0;
 public:
 	Order() = default;
 	Order(Driver* currentDriver, Client* currentClient, const MyString& firstAddress, const MyString& secondAddress, const MyString& additionalInfo,

@@ -7,12 +7,4 @@
 
 int main() {
 	menu();
-	/*UserManagement uManagement;
-	uManagement.registerClient();
-	uManagement.logClient();
-	uManagement.logoutClient();*/
-	
-	
-	//трябва да catch-на грешките
-	//castvaneto da se opraviiiiiiiiiiiiiiiiiiiiiiiiiiiiii
 }

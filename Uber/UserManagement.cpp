@@ -3,7 +3,7 @@
 
 UserManagement::UserManagement()
 {
-	//clients = 
+	//..
 }
 
 void UserManagement::registerClient()
@@ -12,7 +12,7 @@ void UserManagement::registerClient()
 	std::cout << "Please enter what type of user you are (1 for client, 2 for driver): " << std::endl;
 	std::cin >> userType;
 	if (userType != 1) {
-		throw std::logic_error("If you are a client, your user type should be 1!");
+		std::cout << "If you are a client, your user type should be 1!";
 	}
 
 	Client client;
@@ -26,7 +26,7 @@ void UserManagement::registerDriver()
 	std::cout << "Please enter what type of user you are (1 for client, 2 for driver): " << std::endl;
 	std::cin >> userType;
 	if (userType != 2) {
-		throw std::logic_error("If you are a driver, your user type should be 2!");
+		std::cout << "If you are a driver, your user type should be 2!";
 	}
 
 	Driver driver;
@@ -49,7 +49,7 @@ void UserManagement::logClient()
 		}
 	}
 	if (loggedUser == nullptr) {
-		throw std::logic_error("There is no such user in the system!");
+		std::cout << "There is no such user in the system!";
 		
 	}
 }
@@ -69,7 +69,7 @@ void UserManagement::logDriver()
 		}
 	}
 	if (loggedUser == nullptr) {
-		throw std::logic_error("There is no such user in the system!");
+		std::cout << "There is no such user in the system!";
 		
 	}
 }
@@ -110,11 +110,9 @@ void UserManagement::makeOrder()
 		std::cout << "No additional information will be added!" << std::endl;
 	}
 	else {
-		throw std::logic_error("Invalid input!");
+		std::cout << "Invalid input!";
 	}
-	
-	//logoutClient();
-	//return closestDriver(x1, y1);
+
 	Client* client = dynamic_cast<Client*>(loggedUser);
 	if (client == nullptr) {
 		std::cout << "Error! Only clients can make an order!" << std::endl;
@@ -129,19 +127,6 @@ void UserManagement::makeOrder()
 
 Driver* UserManagement::closestDriver(int x, int y, int declinedOrders) const
 {
-	/*int minDistance = drivers[0].getDistance(x, y);
-	Driver* wantedDriver = &drivers[0];
-
-	for (size_t i = 0; i < drivers.Size(); i++)
-	{
-		size_t distance = drivers[i].getDistance(x, y);
-		if (i != 0 && distance < minDistance) {
-			minDistance = distance;
-			wantedDriver = &drivers[i];
-		}
-	}
-	return wantedDriver;*/
-	//Order order;
 	Driver* closestDriver = &drivers[0];
 	int closestDistance = closestDriver->getDistance(x, y);
 
@@ -230,20 +215,6 @@ void UserManagement::checkMessages() const
 	}
 	driver->checkMessages();
 }
-
-//void UserManagement::clientPays() const
-//{
-//	int id;
-//	std::cout << "Choose an id: " << std::endl;
-//	std::cin >> id;
-//	Client* client = dynamic_cast<Client*>(loggedUser);
-//	if (client == nullptr) {
-//		std::cout << "Error! Only clients can pay for an order!" << std::endl;
-//		return;
-//	}
-//	//double amount = 
-//	//Order* currentOrder = client->pay(id, amount);
-//}
 
 void UserManagement::rate() const
 {

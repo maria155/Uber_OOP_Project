@@ -20,14 +20,6 @@ Order::Order(Driver* currentDriver, Client* currentClient, const MyString& first
 	id = rand() % 100; //generates a random number between 0 and 99 for the id
 }
 
-//int Order::calculateTime(int x1, int y1, int x2, int y2)
-//{
-//	int dx = x1 - x2;
-//	int dy = y1 - y2;
-//
-//	return sqrt(dx * dx + dy * dy) * 10;
-//}
-
 void Order::changeStatus(orderStatus statusOfOrder)
 {
 
@@ -73,7 +65,7 @@ bool Order::changeDriver(Driver* driver)
 		return true;
 	}
 	else {
-		//message
+		std::cout << "Error!" << std::endl;
 		return false;
 	}
 }

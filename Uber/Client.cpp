@@ -12,11 +12,6 @@ Client::Client(UserType userType, const MyString& username, const MyString& pass
 
 void Client::registerUser() 
 {
-	/*std::cout << "Please enter what type of user you are (1 for client, 2 for driver): " << std::endl;
-	std::cin >> userType;
-	if (userType != 1) {
-		throw std::logic_error("If you are a client, your user type should be 1!");
-	}*/
 	std::cout << "Please enter your username: " << std::endl;
 	std::cin >> username;
 	std::cout << "Please enter your password: " << std::endl;
@@ -59,16 +54,3 @@ void Client::checkOrder() const
 	currentOrder->viewOrder();
 }
 
-
-
-//void Client::login() 
-//{
-//	/*std::cout << "Please enter your username: " << std::endl;
-//	std::cin >> username;
-//	std::cout << "Please enter your password: " << std::endl;
-//	std::cin >> password;*/
-//}
-//
-//void Client::logout() const
-//{
-//}

@@ -52,14 +52,6 @@ void Driver::registerUser()
 
 }
 
-//void Driver::login() 
-//{
-//}
-//
-//void Driver::logout() const
-//{
-//}
-
 size_t Driver::getDistance(int c1, int c2) const
 {
 	int dx = c1 - point.x;
@@ -101,20 +93,9 @@ Order* Driver::declineOrder(int id)
 		return order;
 	}
 	else {
-		//error message
+		std::cout << "Error!";
 	}
 }
-
-//int Driver::findOrderPerId(int id) const
-//{
-//	for (int i = 0; i < orders.Size(); i++)
-//	{
-//		if (orders[i]->getId() == id) {
-//			return i;
-//		}
-//	}
-//	return -1;
-//}
 
 Order* Driver::finishOrder(int id)
 {
